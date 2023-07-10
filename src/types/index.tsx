@@ -8,8 +8,8 @@ export interface IProps {
   isEmpty?: boolean;
   value?: string;
   type?: 'text' | 'email' | 'url' | 'password';
-  typeButton?: 'submit';
-  id?: string;
+  typeButton?: 'submit' | 'button';
+  id?: number;
   placeholder?: string;
   name?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -20,6 +20,8 @@ export interface IProps {
   handleChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   dataLogin?: ILogin;
   dataRegister?: IRegister;
+  title?: string;
+  author?: string;
 }
 
 export interface ILogin {
@@ -33,4 +35,18 @@ export interface IRegister {
   repeatPassword: string,
   firstName: string,
   lastName: string
+}
+
+export interface IEdit {
+  title: string,
+  text: string,
+  url: string
+}
+
+export interface IArticle {
+  title: string;
+  text: string;
+  author: string;
+  url: string;
+  email: string;
 }

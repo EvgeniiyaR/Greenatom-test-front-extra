@@ -1,18 +1,33 @@
-import { IProps } from "../../types";
+import { inject, observer } from "mobx-react";
 import Button from "../button/Button";
 import AuthForm from "../form/AuthForm";
 import Input from "../input/Input";
+import AppStore from "../../stores/AppStore";
+import { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ handleLogin, handleChange, dataLogin }: IProps) => {
+const Login = inject('store')(observer(() => {
+  const { handleLogin, handleChangeLogin, dataLogin, isNotDataCheck } = AppStore;
+  const navigate = useNavigate();
+
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    handleLogin();
+    navigate('/');
+  };
+
   return (
-    <AuthForm text='Войти' name='login' onSubmit={handleLogin} >
+    <AuthForm text='Войти' name='login' onSubmit={(e) => onSubmit(e)} >
       <>
-        <Input type='email' label='Введите email' onChange={handleChange} name='email' value={dataLogin?.email} />
-        <Input type='password' label='Введите пароль' onChange={handleChange} name='password' value={dataLogin?.password} />
+        <Input type='email' label='Введите email' onChange={handleChangeLogin} name='email' value={dataLogin?.email} />
+        <Input type='password' label='Введите пароль' onChange={handleChangeLogin} name='password' value={dataLogin?.password} />
         <Button typeButton='submit' text='Войти' />
+        {isNotDataCheck &&
+        <h1>Введите такие же данные как при регистрации</h1>
+        }
       </>
     </AuthForm>
     )
-};
+}));
 
  export default Login;

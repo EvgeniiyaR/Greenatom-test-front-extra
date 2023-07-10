@@ -4,6 +4,8 @@ import './index.css';
 import App from './components/app/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'mobx-react';
+import AppStore from './stores/AppStore';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={AppStore}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

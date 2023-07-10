@@ -1,36 +1,43 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import './Header.css';
-import { IProps } from '../../types';
-import { observer } from 'mobx-react-lite';
+import { inject, observer } from "mobx-react";
+import AppStore from '../../stores/AppStore';
 
-const Header = observer(({ isLoggedIn }: IProps) => {
+const Header = inject('store')(observer(() => {
+  const { isLoggedIn, handleLogout, currentUser } = AppStore;
+
   return (
     <header className="header">
-      {isLoggedIn ?
-      <h1>
-        <Routes>
-          <Route path="/" element={<li><Link className="header__link" to="/sign-in">Выйти</Link></li>} />
-        </Routes>
-      </h1>
+      {!!isLoggedIn ?
+      <nav>
+        <ul className="header__list">
+          <li>{currentUser?.firstName}</li>
+          <li>{currentUser?.lastName}</li>
+          <li>{currentUser?.email}</li>
+          <Routes>
+            <Route path="/" element={<li><Link className="header__link" to="/login" onClick={handleLogout}>Выйти</Link></li>} />
+          </Routes>
+        </ul>
+      </nav>
       :
       <nav>
         <ul className="header__list">
           <Routes>
-            <Route path="/sign-in" element={<li><Link className="header__link" to="/sign-up">Регистрация</Link></li>} />
-            <Route path="/sign-up" element={<li><Link className="header__link" to="/sign-in">Войти</Link></li>} />
+            <Route path="/login" element={<li><Link className="header__link" to="/register">Регистрация</Link></li>} />
+            <Route path="/register" element={<li><Link className="header__link" to="/login">Войти</Link></li>} />
             <Route path="*" element=
             {
               <>
-                <li><Link className="header__link" to="/sign-up">Регистрация</Link></li>
-                <li><Link className="header__link" to="/sign-in">Войти</Link></li>
+                <li><Link className="header__link" to="/register">Регистрация</Link></li>
+                <li><Link className="header__link" to="/login">Войти</Link></li>
               </>
             } />
           </Routes>
         </ul>
       </nav>
       }
-  </header>
+    </header>
   );
-})
+}));
 
 export default Header;

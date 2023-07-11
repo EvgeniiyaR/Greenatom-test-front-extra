@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import './App.css';
 import Header from '../header/Header';
 import AppStore from '../../stores/AppStore';
@@ -31,7 +31,7 @@ const App = inject('store')(observer(() => {
               </>
               }
               <Route path="*" element={<NotFound />} />
-              <Route path='/articles/:id' element={<Article />} />
+              <Route path="/articles/:id" element={<Article />} />
             </Routes>
         </div>
       </div>

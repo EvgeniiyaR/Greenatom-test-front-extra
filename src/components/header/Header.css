@@ -1,0 +1,27 @@
+.header {
+  max-width: 500px;
+  margin: 50px auto;
+}
+
+.header__list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.header__link {
+  text-decoration: none;
+  color: black;
+  border: 3px solid;
+  padding: 5px;
+  transition: background-color .2s;
+  width: 100px;
+  display: block;
+  text-align: center;
+}
+
+.header__link:hover {
+  background-color: rgba(0, 0, 0, .1);
+}

@@ -141,13 +141,14 @@ class AppStore {
     this.currentArticle.author = `${this.currentUser.firstName} ${this.currentUser.lastName}`;
     this.currentArticle.email = this.currentUser.email || '';
     const articles = this.getArticles();
-    articles.push(this.currentArticle);
+    articles.unshift(this.currentArticle);
     localStorage.setItem('articleList', JSON.stringify(articles));
   }
 
   public handleLogout = () => {
     this.isLoggedIn = 0;
     localStorage.setItem('isLoggedIn', String(0));
+    ['email', 'firstName', 'lastName'].forEach((item) => localStorage.removeItem(item));
   }
 
   public handleClickEdit = () => {
@@ -159,6 +160,16 @@ class AppStore {
 
   public handleClickAdd = () => {
     this.isAdd = true;
+    this.dataArticle = {
+      title: '',
+      text: '',
+      url: '',
+    }
+  }
+
+  public handleClickExit = () => {
+    this.isAdd = false;
+    this.isEdit = false;
     this.dataArticle = {
       title: '',
       text: '',

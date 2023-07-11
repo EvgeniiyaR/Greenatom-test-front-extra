@@ -11,12 +11,11 @@ const Header = inject('store')(observer(() => {
       {!!isLoggedIn ?
       <nav>
         <ul className="header__list">
-          <li>{currentUser?.firstName}</li>
-          <li>{currentUser?.lastName}</li>
-          <li>{currentUser?.email}</li>
           <Routes>
             <Route path="/" element={<li><Link className="header__link" to="/login" onClick={handleLogout}>Выйти</Link></li>} />
+            <Route path="/articles/:id" element={<li><Link className="header__link" to="/">Назад</Link></li>} />
           </Routes>
+          <li>{currentUser?.email}</li>
         </ul>
       </nav>
       :

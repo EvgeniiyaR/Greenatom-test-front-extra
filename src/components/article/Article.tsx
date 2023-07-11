@@ -8,7 +8,7 @@ import { inject, observer } from 'mobx-react';
 import { FormEvent } from 'react';
 
 const Article = inject('store')(observer(() => {
-  const { handleEdit, handleClickEdit, isEdit, currentArticle, dataArticle, handleChange, currentUser } = AppStore;
+  const { handleEdit, handleClickEdit, isEdit, currentArticle, dataArticle, handleChange, currentUser, handleClickExit } = AppStore;
   let { id } = useParams();
   const _id = Number(id);
   const navigate = useNavigate();
@@ -52,13 +52,17 @@ const Article = inject('store')(observer(() => {
   }
 
   return (
-    <>
+    <main className="main">
       {isEdit ?
-        <AuthForm name='edit' onSubmit={(e) => onSubmit(e)}>
-          <Input type='text' label='Название' name='title' value={dataArticle.title} onChange={handleChange} />
-          <textarea className="form__textarea" name="text" id="" cols={30} rows={10} defaultValue={dataArticle.text} onChange={handleChange}></textarea>
-          <Button typeButton='submit' text='Сохранить' />
-        </AuthForm>
+        <>
+          <button className="main__button-cancel" type="button" onClick={handleClickExit}></button>
+          <AuthForm name='edit' onSubmit={(e) => onSubmit(e)}>
+            <Input type='text' label='Название' name='title' value={dataArticle.title} onChange={handleChange} />
+            <textarea className="form__textarea" name="text" id="" placeholder="Текст статьи" cols={30} rows={10} defaultValue={dataArticle.text} onChange={handleChange}></textarea>
+            <Input type='url' label='Ссылка на картинку' name='url' value={dataArticle.url} onChange={handleChange} />
+            <Button typeButton='submit' text='Сохранить' />
+          </AuthForm>
+        </>
         :
         <>
           <h1>{currentArticle.title}</h1>
@@ -72,7 +76,7 @@ const Article = inject('store')(observer(() => {
           }
         </>
       }
-    </>
+    </main>
   )
 }));
 

@@ -22,6 +22,7 @@ export interface IProps {
   dataRegister?: IRegister;
   title?: string;
   author?: string;
+  url?: string;
 }
 
 export interface ILogin {

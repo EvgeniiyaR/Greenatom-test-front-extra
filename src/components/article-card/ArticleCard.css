@@ -1,0 +1,19 @@
+.main__link {
+  box-sizing: border-box;
+  text-decoration: none;
+  color: black;
+  display: block;
+  width: 150px;
+  height: 150px;
+  padding: 10px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  background-image: url(https://skmetallspb.ru/wp-content/themes/skmetall/img/stopper.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}

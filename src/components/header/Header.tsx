@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import AppStore from '../../stores/AppStore';
 
 const Header = inject('store')(observer(() => {
-  const { isLoggedIn, handleLogout, currentUser } = AppStore;
+  const { isLoggedIn, handleLogout, currentUser, handleClickExit, isAdd } = AppStore;
 
   return (
     <header className="header">
@@ -12,8 +12,11 @@ const Header = inject('store')(observer(() => {
       <nav>
         <ul className="header__list">
           <Routes>
+            {isAdd &&
+            <Route path="/" element={<li><Link className="header__link" onClick={handleClickExit} to="/">Назад</Link></li>} />
+            }
             <Route path="/" element={<li><Link className="header__link" to="/login" onClick={handleLogout}>Выйти</Link></li>} />
-            <Route path="/articles/:id" element={<li><Link className="header__link" to="/">Назад</Link></li>} />
+            <Route path="/articles/:id" element={<li><Link className="header__link" onClick={handleClickExit} to="/">Назад</Link></li>} />
           </Routes>
           <li>{currentUser?.email}</li>
         </ul>

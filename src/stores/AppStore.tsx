@@ -12,7 +12,7 @@ class AppStore {
   public isEdit: boolean = false;
   public isAdd: boolean = false;
   public isLoggedIn: number = this.getisLoggedIn();
-  private root: HTMLElement;
+  private body: HTMLElement;
   public dataLogin: ILogin = {
     email: '',
     password: ''
@@ -32,7 +32,8 @@ class AppStore {
 
   constructor() {
     makeAutoObservable(this);
-    this.root = document.querySelector('#root') as HTMLElement;
+    this.body = document.querySelector('body') as HTMLElement;
+
   }
 
   private getArticles() {
@@ -62,9 +63,8 @@ class AppStore {
   }
 
   public changeColor = () => {
-    this.root.style.backgroundColor = `${this.generateColor()}`;
-    this.root.style.transition = 'background-color 1s';
-    this.root.style.overflowY = 'scroll';
+    this.body.style.backgroundColor = `${this.generateColor()}`;
+    this.body.style.transition = 'background-color 1s';
   };
 
   public handleChangeLogin = (event: ChangeEvent<HTMLInputElement>) => {

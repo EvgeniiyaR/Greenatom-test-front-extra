@@ -27,15 +27,15 @@ const Main = inject('store')(observer(() => {
           <button className="main__button-cancel" type="button" onClick={handleClickExit}></button>
           <AuthForm name='add' onSubmit={handleAdd}>
             <Input type='text' label='Название' name='title' value={dataArticle.title} onChange={handleChange} />
-            <textarea className="form__textarea" name="text" id="" placeholder="Текст статьи" cols={30} rows={10} defaultValue={dataArticle.text} onChange={handleChange}></textarea>
-            <Input type='url' label='Ссылка на картинку' name='url' value={dataArticle.url} onChange={handleChange} />
+            <textarea className="form__textarea" name="text" id="" placeholder="Текст статьи" rows={10} defaultValue={dataArticle.text} onChange={handleChange}></textarea>
+            <Input type='url' label='Ссылка на обложку' name='url' value={dataArticle.url} onChange={handleChange} />
             <Button typeButton='submit' text='Сохранить' />
           </AuthForm>
         </>
         :
         <>
           <ul className="main__list">
-            <li><button className="main__button" type="button" onClick={handleClickAdd}>Cоздать статью</button></li>
+            <li><button className="main__button-add" type="button" onClick={handleClickAdd}>+</button></li>
           {articles && articles.map((item: IArticle, index: number) => (
             <li className="main__element" key={index}>
               <ArticleCard title={item.title} text={item.text} author={item.author} id={index} url={item.url}/>

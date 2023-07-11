@@ -1,3 +1,4 @@
+import './Login.css';
 import { inject, observer } from "mobx-react";
 import Button from "../button/Button";
 import AuthForm from "../form/AuthForm";
@@ -17,16 +18,16 @@ const Login = inject('store')(observer(() => {
   };
 
   return (
-    <AuthForm text='Войти' name='login' onSubmit={(e) => onSubmit(e)} >
-      <>
-        <Input type='email' label='Введите email' onChange={handleChangeLogin} name='email' value={dataLogin?.email} />
-        <Input type='password' label='Введите пароль' onChange={handleChangeLogin} name='password' value={dataLogin?.password} />
-        <Button typeButton='submit' text='Войти' />
+    <>
+      <AuthForm text='Войти' name='login' onSubmit={(e) => onSubmit(e)} >
+          <Input type='email' label='Введите email' onChange={handleChangeLogin} name='email' value={dataLogin?.email} />
+          <Input type='password' label='Введите пароль' onChange={handleChangeLogin} name='password' value={dataLogin?.password} />
+          <Button typeButton='submit' text='Войти' />
+      </AuthForm>
         {isNotDataCheck &&
-        <h1>Введите такие же данные как при регистрации</h1>
+          <p className="form__error">Введите данные, которые указали при регистрации</p>
         }
-      </>
-    </AuthForm>
+    </>
     )
 }));
 

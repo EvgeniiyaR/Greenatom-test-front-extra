@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import './App.css';
 import Header from '../header/Header';
 import AppStore from '../../stores/AppStore';
@@ -13,7 +13,11 @@ import Article from '../article/Article';
 
 const App = inject('store')(observer(() => {
   const currentUser = useContext(UserCurrentContext);
-  const { isLoggedIn } = AppStore;
+  const { isLoggedIn, changeColor } = AppStore;
+
+  useEffect(() => {
+    changeColor();
+  }, []);
 
   return (
     <UserCurrentContext.Provider value={currentUser}>

@@ -58,21 +58,23 @@ const Article = inject('store')(observer(() => {
           <button className="main__button-cancel" type="button" onClick={handleClickExit}></button>
           <AuthForm name='edit' onSubmit={(e) => onSubmit(e)}>
             <Input type='text' label='Название' name='title' value={dataArticle.title} onChange={handleChange} />
-            <textarea className="form__textarea" name="text" id="" placeholder="Текст статьи" cols={30} rows={10} defaultValue={dataArticle.text} onChange={handleChange}></textarea>
-            <Input type='url' label='Ссылка на картинку' name='url' value={dataArticle.url} onChange={handleChange} />
+            <textarea className="form__textarea" name="text" id="" placeholder="Текст статьи" rows={10} defaultValue={dataArticle.text} onChange={handleChange}></textarea>
+            <Input type='url' label='Ссылка на обложку' name='url' value={dataArticle.url} onChange={handleChange} />
             <Button typeButton='submit' text='Сохранить' />
           </AuthForm>
         </>
         :
         <>
-          <h1>{currentArticle.title}</h1>
-          <p>{currentArticle.text}</p>
-          <p>{currentArticle.author || `${currentUser.firstName} ${currentUser.lastName}`}</p>
+          <div className="main__article">
+            <h1 className="main__title-full">{currentArticle.title}</h1>
+            <p className="main__text-full">{currentArticle.text}</p>
+            <p className="main__author-full">{currentArticle.author || `${currentUser.firstName} ${currentUser.lastName}`}</p>
+          </div>
           {articles[_id].email === currentUser.email &&
-          <>
-            <button type='button' onClick={handleClickEdit}>Редактировать</button>
-            <button type='button' onClick={handleClickDelete}>Удалить</button>
-          </>
+          <div className="main__button-wrapper">
+            <button className="main__button" type="button" onClick={handleClickEdit}>Редактировать</button>
+            <button className="main__button" type="button" onClick={handleClickDelete}>Удалить</button>
+          </div>
           }
         </>
       }
